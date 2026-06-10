@@ -1,0 +1,30 @@
+# ===== data & logs =====
+logs/
+wandb/
+*.log
+logs/
+hdf5_images/
+# ===== datasets / assets =====
+
+assets/
+
+# ===== model outputs =====
+checkpoints/
+openpi_checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# ===== cache =====
+.cache/
+hf-cache/
+.vscode
+.pytest_cache
+# ===== python =====
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# ===== tools =====
+linux-bcecmd-*/
