@@ -116,12 +116,29 @@ class LeRobotDatasetMetadata:
 
     def get_data_file_path(self, ep_index: int) -> Path:
         ep_chunk = self.get_episode_chunk(ep_index)
-        fpath = self.data_path.format(episode_chunk=ep_chunk, episode_index=ep_index)
+        ep_dict = self.episodes[ep_index] if (self.episodes is not None and ep_index < len(self.episodes)) else {}
+        chunk_idx = ep_dict.get("meta/episodes/chunk_index", ep_dict.get("data/chunk_index", ep_chunk))
+        file_idx = ep_dict.get("meta/episodes/file_index", ep_dict.get("data/file_index", 0))
+        fpath = self.data_path.format(
+            episode_chunk=ep_chunk,
+            episode_index=ep_index,
+            chunk_index=chunk_idx,
+            file_index=file_idx
+        )
         return Path(fpath)
 
     def get_video_file_path(self, ep_index: int, vid_key: str) -> Path:
         ep_chunk = self.get_episode_chunk(ep_index)
-        fpath = self.video_path.format(episode_chunk=ep_chunk, video_key=vid_key, episode_index=ep_index)
+        ep_dict = self.episodes[ep_index] if (self.episodes is not None and ep_index < len(self.episodes)) else {}
+        chunk_idx = ep_dict.get(f"videos/{vid_key}/chunk_index", ep_dict.get("meta/episodes/chunk_index", ep_dict.get("data/chunk_index", ep_chunk)))
+        file_idx = ep_dict.get(f"videos/{vid_key}/file_index", ep_dict.get("meta/episodes/file_index", ep_dict.get("data/file_index", 0)))
+        fpath = self.video_path.format(
+            episode_chunk=ep_chunk,
+            video_key=vid_key,
+            episode_index=ep_index,
+            chunk_index=chunk_idx,
+            file_index=file_idx
+        )
         return Path(fpath)
 
     def get_episode_chunk(self, ep_index: int) -> int:

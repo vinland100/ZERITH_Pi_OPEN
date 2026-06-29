@@ -358,12 +358,12 @@ _CONFIGS = [
         data=LeRobotZerithJointDataConfig(
             # LeRobot stores the converted dataset under <LEROBOT_HOME>/<repo_id>.
             # Keep this value aligned with train.sh REPO_ID and the dataset path used during conversion.
-            repo_id="zerith/test",
+            repo_id="zerith-h1-pro-pick-place-cube-fix-5pos-200-pos-only-final",
             assets=AssetsConfig(
                 # Normalization stats are loaded from <assets_dir>/<asset_id>/norm_stats.json.
                 # The asset_id can match repo_id, or point to another robot/task's stats when reusing assets.
                 assets_dir="./assets",
-                asset_id="zerith/test",
+                asset_id="zerith-h1-pro-pick-place-cube-fix-5pos-200-pos-only-final",
             ),
             base_config=DataConfig(
                 local_files_only=True,
@@ -378,7 +378,8 @@ _CONFIGS = [
         ema_decay=None,
         # Checkpoints are saved to <checkpoint_base_dir>/<config name>/<exp_name>/.
         checkpoint_base_dir="./openpi_checkpoints",
-        batch_size=8,
+        batch_size=32,
+        save_interval=10000,
     ),
 ]
 
